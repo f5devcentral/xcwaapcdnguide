@@ -14,11 +14,16 @@ Use this guide and the provided sample app to explore the F5 Distributed Cloud C
 - CDN configuration 
 - App protection via CDN 
 
+This guide can be completed step-by-step using the F5 Distributed Cloud console, or leverage automatic configuration via included Ansible scripts.
+
 Pre-requisites
 ##############
 
-- F5 Distributed Cloud Account (trial is sufficient for this demo guide)
+- F5 Distributed Cloud Account
 - A Web browser to access the F5 Distributed Cloud console, attack the app and see the developer tools to test load time with / without CDN
+  
+For Ansible configuration:
+- Linux-based system (or on Windows run the Subsystem For Linux) with configured Ansible binaries - follow the Ansible section of the guide
 
 Create HTTP Load Balancer with Web Application Firewall
 #######################################################
@@ -178,6 +183,15 @@ Now we will attack the app to see that the attacks are blocked by WAAP services 
 In case of content updates in your origin servers, you can force the CDN servers to fetch the updated content using the purge option. Open the configuration menu of the CDN and select **Purge**. The CDN service initiates purge for all the cache servers.
 
 .. figure:: assets/cdn_purge.png
+
+
+Automated Config of the Demo Environment Configuration via Ansible
+###################################################################
+
+Follow the README in the Ansible directory to set up the environment and the demo. You will need to configure the required Ansible Galaxy collections, tokens, and also update the playbook.yaml section in the beginning of the playbook that captures F5 Distributed Cloud environment settings.
+
+Once configured, we recommend you review *playbook.yaml* sections, and pick those you'd like to run (such as environment setup), and comment out the rest. Of course, you can choose to run the entire playbook -- that will go through and do all of the setup & demo config steps automatically from beginning to end.
+
 
 Wrap-Up
 #######
