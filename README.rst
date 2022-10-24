@@ -16,7 +16,7 @@ Use this guide and the provided sample app to explore the F5 Distributed Cloud C
 
 .. figure:: assets/overview.gif
 
-This guide can be completed step-by-step using the F5 Distributed Cloud console, or leverage automatic configuration via included Ansible scripts.
+This guide can be completed step-by-step using the F5 Distributed Cloud console, or leverage automatic configuration via included Ansible scripts (coming soon, early Nov 2022).
 
 Pre-requisites
 ##############
@@ -187,6 +187,8 @@ In case of content updates in your origin servers, you can force the CDN servers
 
 Automated Config of the Demo Environment Configuration via Ansible
 ###################################################################
+
+(Coming Soon: Early Nov, 2022)
 
 Follow the README in the Ansible directory to set up the environment and the demo. You will need to configure the required Ansible Galaxy collections, tokens, and also update the playbook.yaml section in the beginning of the playbook that captures F5 Distributed Cloud environment settings.
 
