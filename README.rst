@@ -98,11 +98,9 @@ Copy the host name you see in the configuration. Host name will be used as CNAME
 
 .. figure:: assets/lb_dns_2.png
 
-First, paste the host name you just copied as the domain. 
+Edit your DNS Zone and create new CNAME records.
 
 .. figure:: assets/lb_dns_3.png
-
-Then paste the CNAME value you copied earlier. Click **Apply** to move on.
 
 .. figure:: assets/lb_dns_4.png
 
@@ -155,7 +153,7 @@ Copy the CNAME value for the domain and service domain.
 
 .. figure:: assets/cdn_dns_2.png
 
-Fill in the domains and click **Apply**. 
+Create corresponding records in your DNS Zone. 
 
 .. figure:: assets/cdn_dns_3.png
 
