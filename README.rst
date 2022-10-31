@@ -176,7 +176,7 @@ First, let's test the app without the CDN added. As you can see in the picture b
 
 .. figure:: assets/tests_waap.png
 
-Now let's see the load time for the app with CDN. As you can see in the picture below, the load time for CDN app is 1.17 s, and the **x-cashe-status** is **HIT** which means that your request was served by CDN, not origin servers.
+Now let's see the load time for the app with CDN. As you can see in the picture below, the load time for CDN app is 1.17 s, and the **x-cache-status** is **HIT** which means that your request was served by CDN, not origin servers.
 
 .. figure:: assets/tests_cdn.png
 
