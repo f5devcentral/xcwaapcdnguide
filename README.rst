@@ -98,7 +98,7 @@ Now we need to copy the host name. Open the menu of HTTP Load Balancer we've jus
 
 Copy the host name you see in the configuration. Host name will be used as CNAME value for the domain. After copying the host name, move on and copy CNAME value. It will be used to create an HTTPS certificate.
 
-NOTE: You can skip these steps if you have `delegated your DNS domain<https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation>`_ to F5® Distributed Cloud Services.
+NOTE: You can skip these steps if you have `delegated your DNS domain <https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation>`_ to F5® Distributed Cloud Services.
 
 .. figure:: assets/lb_dns_2.png
 
@@ -151,7 +151,7 @@ You will see the CDN configuration. Click **Save and Exit** to save the configur
 
 You can see the CDN we just created. Now that we've created a CDN, we can need to activate the certificate by specifying DNS records. Open the configuration menu and select **Manage Configuration**.
 
-NOTE: You can skip these steps if you have `delegated your DNS domain<https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation>`_ to F5® Distributed Cloud Services.
+NOTE: You can skip these steps if you `delegated your DNS domain <https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation>`_ to F5® Distributed Cloud Services.
 
 .. figure:: assets/cdn_dns_1.png
 
