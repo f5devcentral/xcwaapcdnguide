@@ -16,7 +16,7 @@ Use this guide and the provided sample app to explore the F5 Distributed Cloud C
 
 .. figure:: assets/overview.gif
 
-This guide can be completed step-by-step using the F5 Distributed Cloud console, or leverage automatic configuration via included Ansible scripts (coming soon, early Nov 2022).
+This guide can be completed step-by-step using the F5 Distributed Cloud console, or leverage automatic configuration via included `Ansible scripts </ansible>`_.
 
 Pre-requisites
 ##############
