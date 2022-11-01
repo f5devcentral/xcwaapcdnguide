@@ -25,8 +25,8 @@ Copy generated token to the ansible script in the evironments section.
 Here you can also configure your domain, namespace, tenant, app prefix, etc.
 
 The solution contains two configurations:
-    - **waap-cdn-https.yaml** for HTTPS with Auto Cert
-    - **waap-cdn-http.yaml** for HTTP
+- **waap-cdn-https.yaml** for HTTPS with Auto Cert
+- **waap-cdn-http.yaml** for HTTP
     
 Both configuration support [F5 Distributed Cloud Domain Delegation](https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation). To enable set **dns_volterra_managed** to **True**. 
 
