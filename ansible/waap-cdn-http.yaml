@@ -1,0 +1,177 @@
+# Demo environment configuration 
+
+- name: Configure CDN Demo application on F5 Distributed Cloud 
+  hosts: webservers
+  collections:
+    - yoctoalex.xc_cloud_modules
+    - kubernetes.core
+  connection: local
+
+  environment:
+      XC_API_TOKEN: "your_api_token"
+      XC_TENANT: "console.ves.volterra.io"
+
+  vars:
+      namespace: "cdn-demo-guide"
+      prefix: ""
+      domain: "your_domain.example.com"
+      dns_volterra_managed: False
+      buytime_online: "54.208.44.177"
+
+  tasks:
+    - name: fetch current tenant details
+      fetch_tenant_settings:
+      register: tenant
+
+    - name: create namespace
+      namespace:
+        state: present
+        wait: True
+        metadata:
+          name: "{{ namespace }}"
+
+    - name: create origin pool
+      origin_pool:
+        state: present
+        metadata:
+          namespace: "{{ namespace }}"
+          name: "{{ prefix }}buytime-pool"
+        spec:
+          origin_servers:
+            - public_ip:
+                ip: "{{ buytime_online }}"
+          port: 80
+          loadbalancer_algorithm: "LB_OVERRIDE"
+          endpoint_selection: "LOCAL_PREFERRED"
+
+    - name: create load balancer
+      http_loadbalancer:
+        state: present
+        metadata:
+          namespace: "{{ namespace }}"
+          name: "{{ prefix }}buytime-lb"
+        spec:
+          domains:
+            - "waap.{{ domain }}"
+          http:
+            port: 80
+            dns_volterra_managed: "{{ dns_volterra_managed }}"
+          default_route_pools:
+            - pool:
+                tenant: "{{ tenant.name }}"
+                namespace: "{{ namespace }}"
+                name: "{{ prefix }}buytime-pool"
+              weight: 1
+              priority: 1
+
+    - name: create app firewall
+      application_firewall:
+        state: present
+        metadata:
+          namespace: "{{ namespace }}"
+          name: "{{ prefix }}buytime-fw"
+        spec:
+          blocking: {}
+          detection_settings:
+            signature_selection_setting:
+              attack_type_settings:
+                disabled_attack_types:
+                  - "ATTACK_TYPE_COMMAND_EXECUTION"
+              high_medium_low_accuracy_signatures: {}
+            enable_suppression: { }
+            enable_threat_campaigns: { }
+            violation_settings:
+              disabled_violation_types:
+                - "VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION"
+          bot_protection_setting:
+            malicious_bot_action: "BLOCK"
+            suspicious_bot_action: "REPORT"
+            good_bot_action: "REPORT"
+          allow_all_response_codes: {}
+          default_anonymization: {}
+          blocking_page:
+            response_code: "Forbidden"
+            blocking_page: "string:///PGh0bWw+PGhlYWQ+PHRpdGxlPlJlcXVlc3QgUmVqZWN0ZWQ8L3RpdGxlPjwvaGVhZD48Ym9keT5UaGUgcmVxdWVzdGVkIFVSTCB3YXMgcmVqZWN0ZWQuIFBsZWFzZSBjb25zdWx0IHdpdGggeW91ciBhZG1pbmlzdHJhdG9yLjxici8+PGJyLz5Zb3VyIHN1cHBvcnQgSUQgaXM6IHt7cmVxdWVzdF9pZH19PGJyLz48YnIvPjxhIGhyZWY9ImphdmFzY3JpcHQ6aGlzdG9yeS5iYWNrKCkiPltHbyBCYWNrXTwvYT48L2JvZHk+PC9odG1sPg=="
+
+    - name: update load balancer with firewall details
+      http_loadbalancer:
+        state: present
+        patch: True
+        metadata:
+          namespace: "{{ namespace }}"
+          name: "{{ prefix }}buytime-lb"
+        spec:
+          disable_waf:
+          app_firewall:
+            tenant: "{{ tenant.name }}"
+            namespace: "{{ namespace }}"
+            name: "{{ prefix }}buytime-fw"
+
+    - name: fetch load balancer
+      http_loadbalancer:
+        state: fetch
+        metadata:
+          namespace: "{{ namespace }}"
+          name: "{{ prefix }}buytime-lb"
+      register: waap_lb
+      retries: 10
+      delay: 10 
+      until: waap_lb.spec.host_name != ""
+      when: dns_volterra_managed == False
+
+    - name: create CDN distribution
+      cdn_loadbalancer:
+        state: present
+        metadata:
+          namespace: "{{ namespace }}"
+          name: "{{ prefix }}buytime-cdn-distribution"
+        spec:
+          domains:
+            - "cdn.{{ domain }}"
+          http:
+            dns_volterra_managed: False
+          add_location: False
+          origin_pool:
+            public_name:
+              dns_name: "waap.{{ domain }}"
+            follow_origin_redirect: False
+            no_tls: { }
+            origin_servers:
+              - public_name:
+                  dns_name: "waap.{{ domain }}"
+
+    - name: fetch CDN load balancer
+      cdn_loadbalancer:
+        state: fetch
+        metadata:
+          namespace: "{{ namespace }}"
+          name: "{{ prefix }}buytime-cdn-distribution"
+      register: cdn_lb
+      retries: 10
+      delay: 10 
+      until: cdn_lb.spec.service_domains[0].service_domain != ""
+      when: dns_volterra_managed == False
+
+    - name: WAAP DNS Records
+      debug:
+        msg:
+          - "-------- WAAP CNAME RECORD --------"
+          - "Record: {{ waap_lb.spec.domains[0] }}"
+          - "Value: {{ waap_lb.spec.host_name }}"
+          - "-----------------------------------"
+      when: dns_volterra_managed == False
+
+    - name: CDN DNS Records
+      debug:
+        msg:
+          - "-------- CDN CNAME RECORD --------"
+          - "Record: {{ cdn_lb.spec.service_domains[0].domain }}"
+          - "Value: {{ cdn_lb.spec.service_domains[0].service_domain }}"
+          - "----------------------------------"
+      when: dns_volterra_managed == False
+
+    - name: Endpoints
+      debug:
+       msg:
+        - "WAAP: http://waap.{{ domain }}"
+        - "CDN: http://cdn.{{ domain }}"
