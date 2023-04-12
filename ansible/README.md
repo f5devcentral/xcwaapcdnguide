@@ -33,7 +33,7 @@ Both configuration support [F5 Distributed Cloud Domain Delegation](https://docs
 ```yaml
   environment:
       XC_API_TOKEN: "your_api_token"
-      XC_TENANT: "console.ves.volterra.io"
+      XC_TENANT: "your_tenant_name.console.ves.volterra.io"
       
   vars:
       namespace: "cdn-demo-guide"
