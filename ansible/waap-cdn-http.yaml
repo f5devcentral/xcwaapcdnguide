@@ -129,7 +129,7 @@
           domains:
             - "cdn.{{ domain }}"
           http:
-            dns_volterra_managed: dns_volterra_managed
+            dns_volterra_managed: "{{ dns_volterra_managed }}"
           add_location: False
           origin_pool:
             public_name:
