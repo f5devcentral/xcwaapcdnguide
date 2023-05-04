@@ -30,9 +30,9 @@ For Ansible configuration:
 Create HTTP Load Balancer with Web Application Firewall
 #######################################################
 
-First, we will need create and configure an HTTP Load Balancer for our app. We will enable redirect to HTTPS and then create an origin pool for the services. Origin pools consist of endpoints and clusters, as well as routes and advertising policies that are required to make the application available to the internet. After that, we will enable and configure WAF for HTTP Load Balancer. 
+First, we will need to create and configure an HTTP Load Balancer for our app. We will enable redirect to HTTPS and then create an origin pool for the services. Origin pools consist of endpoints and clusters, as well as routes and advertising policies that are required to make the application available to the internet. After that, we will enable and configure WAF for HTTP Load Balancer. 
 
-To start with, navigate to the **Load Balancers** service in the service menu.
+To start with, navigate to the **Multi-Cloud App Connect** service in the service menu.
 
 .. figure:: assets/dashboard.png
 
@@ -40,7 +40,7 @@ Select **Load Balancers** and then proceed to **HTTP Load Balancers**. Click the
 
 .. figure:: assets/lb_open.png
 
-Then give it a name and then move on to domain configuration.
+Then give it a name and move on to domain configuration.
 
 .. figure:: assets/lb_meta.png
 
