@@ -102,7 +102,7 @@ NOTE: You can skip these steps if you have `delegated your DNS domain <https://d
 
 .. figure:: assets/lb_dns_2.png
 
-Edit your DNS Zone and create new CNAME records.
+Edit your DNS Zone and create new CNAME records. To do that, go to the **DNS Management** service and proceed to the **DNS Management**. Select **Manage Configuration** in DNS Zone service menu.
 
 .. figure:: assets/lb_dns_3.png
 
@@ -159,7 +159,7 @@ Copy the CNAME value for the domain and service domain.
 
 .. figure:: assets/cdn_dns_2.png
 
-Create corresponding records in your DNS Zone. 
+Create corresponding records in your DNS Zone. Go to the **DNS Management** service and proceed to the **DNS Management**. Select **Manage Configuration** in DNS Zone service menu.
 
 .. figure:: assets/cdn_dns_3.png
 
