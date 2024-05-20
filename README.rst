@@ -1,12 +1,12 @@
 F5 Distributed Cloud WAAP CDN GUIDE
-######################################
+###################################
 
 ==================================================
 
 .. contents:: Table of Contents
 
 Objective
-####################
+#########
 
 Use this guide and the provided sample app to explore the F5 Distributed Cloud Content Delivery Network capabilities. This will help you get familiar with the following features & capabilities:
 
@@ -113,7 +113,7 @@ It may take a few minutes to update the DNS info and generate and apply the cert
 .. figure:: assets/lb_dns_5.png
 
 Create Content Delivery Network
-##############################
+###############################
 
 Let's now create a high-performance content delivery via the F5 global network. F5 Distributed Cloud CDN improves content delivery across environments providing integrated security with support for content caching and containerized edge-based workloads for richer digital experiences. 
 
@@ -190,7 +190,7 @@ In case of content updates in your origin servers, you can force the CDN servers
 
 
 Automated Config of the Demo Environment Configuration via Ansible
-###################################################################
+##################################################################
 
 Follow the README in the `Ansible scripts </ansible>`_ directory to set up the environment and the demo. You will need to configure the required Ansible Galaxy collections, tokens, and also update the playbook.yaml section in the beginning of the playbook that captures F5 Distributed Cloud environment settings.
 
