@@ -8,7 +8,7 @@ F5 Distributed Cloud WAAP CDN GUIDE
 Objective
 #########
 
-Use this guide and the provided sample app to explore the F5 Distributed Cloud Content Delivery Network capabilities. This will help you get familiar with the following features & capabilities:
+Use this guide and the provided sample app to explore F5 **Hybrid Multicloud App Delivery** and **Web Application and API Protection** solution areas. The guide will showcase F5 Distributed Cloud Content Delivery Network capabilities with F5 Distributed Cloud WAF to protect the app. In the course of the guide we will get familiar with the following features:
 
 - HTTP Load Balancer with WAF protection
 - CDN configuration 
@@ -16,16 +16,16 @@ Use this guide and the provided sample app to explore the F5 Distributed Cloud C
 
 .. figure:: assets/overview.gif
 
-This guide can be completed step-by-step using the F5 Distributed Cloud console, or leverage automatic configuration via included `Ansible scripts </ansible>`_.
+This guide can be completed step-by-step using the F5 Distributed Cloud Console, or leverage automatic configuration via included `Ansible scripts </ansible>`_.
 
 Pre-requisites
 ##############
 
-- F5 Distributed Cloud Account
-- A Web browser to access the F5 Distributed Cloud console, attack the app and see the developer tools to test load time with / without CDN
+- F5 Distributed Cloud Console account
+- A web browser to access the Console, attack the app and see the developer tools to test load time with / without CDN
   
 For Ansible configuration:
-- Linux-based system (or on Windows run the Subsystem For Linux) with configured Ansible binaries - follow the Ansible section of the guide
+- Linux-based system (or on Windows run Windows Subsystem for Linux) with configured Ansible binaries - follow the Ansible section of the guide.
 
 Create HTTP Load Balancer with Web Application Firewall
 #######################################################
@@ -44,7 +44,7 @@ Then give it a name and move on to domain configuration.
 
 .. figure:: assets/lb_meta.png
 
-Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we specify **buytime.f5-cloud-demo.com**. And enable HTTP redirecting to HTTPS, as well as adding HSTS Header. 
+Next we need to provide a domain name for our workload: a domain can be delegated to F5, so that Domain Name Service (DNS) entries can be created quickly in order to deploy and route traffic to our workload within seconds. In this demo we use **buytime.f5-cloud-demo.com**. Enable HTTP redirecting to HTTPS, as well as adding HSTS Header. 
 
 .. figure:: assets/lb_domain_ssl.png
 
@@ -68,13 +68,9 @@ Let's now configure origin server. First open the drop-down menu to specify the 
 
 .. figure:: assets/lb_add_origin_5.png
 
-Next we need to configure the port (the end point service/workload available on this port). In this demo it's Port **80**.
+Next, we need to configure the port (the end point service/workload available on this port). Type in **80** and click **Add Origin Pool**.
 
 .. figure:: assets/lb_add_origin_7.png
-
-Then just click **Continue** to move on.
-
-.. figure:: assets/lb_add_origin_8.png
 
 Once done, click **Apply** to apply the origin pool to the Load Balancer configuration. This will return to the Load Balancer configuration form.
 
@@ -84,13 +80,15 @@ In the **Web Application Firewall** section first enable **Web Application Firew
 
 .. figure:: assets/lb_add_waf_1.png
 
-First, give the Firewall a name. Then specify enforcement mode in the dropdown menu. The default is Monitoring, meaning that the Distributed Cloud WAF service won't block any traffic but will alert on any request that is found to be violating the WAF policy. Blocking mode means that the Distributed Cloud WAF will take mitigation action on offending traffic. Select the **Blocking mode** option and click **Continue**.
+First, give firewall a name. Then specify enforcement mode in the dropdown menu. The default is Monitoring, meaning that the Distributed Cloud WAF service won't block any traffic but will alert on any request that is found to be violating the WAF policy. Blocking mode means that the Distributed Cloud WAF will take mitigation action on offending traffic. Select **Blocking** and click **Add App Firewall**.
 
 .. figure:: assets/lb_add_waf_2.png
 
-Click **Save and Exit** to save the HTTP Load Balancer settings.
+Click **Add HTTP Load Balancer** to save the HTTP Load Balancer settings.
 
 .. figure:: assets/lb_save.png
+
+TBD
 
 Now we need to copy the host name. Open the menu of HTTP Load Balancer we've just created and select **Manage Configuration**.
 
@@ -115,13 +113,13 @@ It may take a few minutes to update the DNS info and generate and apply the cert
 Create Content Delivery Network
 ###############################
 
-Let's now create a high-performance content delivery via the F5 global network. F5 Distributed Cloud CDN improves content delivery across environments providing integrated security with support for content caching and containerized edge-based workloads for richer digital experiences. 
+Let's now create a high-performance content delivery via the F5 Global Network. Distributed Cloud CDN improves content delivery across environments providing integrated security with support for content caching and containerized edge-based workloads for richer digital experiences. 
 
 Open the service menu and select **Content Delivery Network**.
 
 .. figure:: assets/cdn_open.png
 
-Navigate to **Distributions** and click the **Add Distribution** button. 
+Navigate to **CDN Distributions** and click the **Add CDN Distribution** button. 
 
 .. figure:: assets/cdn_create_1.png
 
@@ -145,9 +143,11 @@ Take a look at the CDN Origin Pool configuration and complete by clicking **Appl
 
 .. figure:: assets/cdn_create_6.png
 
-You will see the CDN configuration. Click **Save and Exit** to save the configuration and proceed.
+You will see the CDN configuration. Click **Add CDN Distribution** to save the configuration and proceed.
 
 .. figure:: assets/cdn_create_7.png
+
+TBD
 
 You can see the CDN we just created. Now that we've created a CDN, we can need to activate the certificate by specifying DNS records. Open the configuration menu and select **Manage Configuration**.
 
@@ -200,6 +200,6 @@ Once configured, we recommend you review *playbook.yaml* sections, and pick thos
 Wrap-Up
 #######
 
-At this stage you should have set up a Content Delivery Network (CDN) for your app. You've configured and applied high-performance content delivery via the F5 global network with integrated security and support for content caching. 
+At this stage you should have set up a CDN for your app. You've configured and applied high-performance content delivery via the F5 Global Network with integrated security and support for content caching. 
 
 We hope you have a better understanding of F5 Distributed Cloud CDN and are now ready to implement it for your own organization. Should you have any issues or questions, please feel free to raise them via GitHub. Thank you!
