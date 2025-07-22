@@ -25,7 +25,7 @@ Pre-requisites
 - A web browser to access the Console, attack the app and see the developer tools to test load time with / without CDN
   
 For Ansible configuration:
-- Linux-based system (or on Windows run Windows Subsystem for Linux) with configured Ansible binaries - follow the Ansible section of the guide.
+- Linux-based system (or on Windows run Windows Subsystem for Linux) with configured Ansible binaries - follow the `Ansible section </ansible>`_ of the guide.
 
 Create HTTP Load Balancer with Web Application Firewall
 #######################################################
@@ -184,7 +184,7 @@ Now we will attack the app to see that the attacks are blocked by WAAP services 
 
 .. figure:: assets/test_cdn_waap.png
 
-In case of content updates in your origin servers, you can force the CDN servers to fetch the updated content using the purge option. Open the configuration menu of the CDN and select **Purge**. The CDN service initiates purge for all the cache servers.
+In case of content updates in your origin servers, you can force the CDN servers to fetch the updated content using the purge option. Open the configuration menu of the CDN and select **Purge CDN Cache**. The CDN service initiates purge for all the cache servers.
 
 .. figure:: assets/cdn_purge.png
 
