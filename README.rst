@@ -1,4 +1,4 @@
-F5 Distributed Cloud WAAP CDN GUIDE
+F5 Distributed Cloud CDN with WAAP
 ###################################
 
 ==================================================
@@ -8,7 +8,7 @@ F5 Distributed Cloud WAAP CDN GUIDE
 Objective
 #########
 
-Use this guide and the provided sample app to explore F5 **Hybrid Multicloud App Delivery** and **Web Application and API Protection** solution areas. The guide will showcase F5 Distributed Cloud Content Delivery Network capabilities with F5 Distributed Cloud WAF to protect the app. In the course of the guide we will get familiar with the following features:
+Use this guide and the provided sample app to explore F5 Distributed Cloud CDN from the lens of **Application Delivery** and **Application Security**, specifically **Web Application and API Protection** (WAAP) solution area. The guide will showcase **F5 Distributed Cloud Content Delivery Network** capabilities with **F5 Distributed Cloud App Connect**, and **F5 Distributed Cloud WAF** to protect the app. In the course of the guide we will get familiar with the following features:
 
 - HTTP Load Balancer with WAF protection
 - CDN configuration 
