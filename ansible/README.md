@@ -1,14 +1,6 @@
 Installation Instructions
 ------------ 
 
-Install Ansible Galaxy collections and Python dependencies:
- 
-```shell
-  ansible-galaxy collection install yoctoalex.xc_cloud_modules
-  ansible-galaxy collection install kubernetes.core
-  pip3 install kubernetes
-```
-
 Create an API Token. Navigate to the **Administration** page.
   
 ![navigate_to_administration](../assets/token_navigate.png)
@@ -28,7 +20,7 @@ The solution contains two configurations:
 - **waap-cdn-https.yaml** for HTTPS with Auto Cert
 - **waap-cdn-http.yaml** for HTTP
     
-Both configurations support [F5 Distributed Cloud Domain Delegation](https://docs.cloud.f5.com/docs/how-to/app-networking/domain-delegation). To enable, set **dns_volterra_managed** to **True**. 
+Both configurations support [F5 Distributed Cloud Domain Delegation](https://docs.cloud.f5.com/docs-v2/dns-management/how-to/delegate-domain). To enable, set **dns_volterra_managed** to **True**. 
 
 ```yaml
   environment:
@@ -45,7 +37,7 @@ Both configurations support [F5 Distributed Cloud Domain Delegation](https://doc
 Execute the Ansible script with the following command:
 
 ```shell
-  ansible-playbook waap-cdn-http.yaml -i ./hosts
+  ansible-playbook -i ./hosts waap-cdn-http.yaml
 ```
 
 Check the output and create the corresponding CNAME records on your DNS server. You can also find the created endpoints to access the website.
